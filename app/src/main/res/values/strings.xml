@@ -14,4 +14,5 @@
     <string name="validate">VALIDATE</string>
     <string name="register">REGISTER</string>
     <string name="add_feed">ADD FEED</string>
+    <string name="mock">MOCK</string>
 </resources>

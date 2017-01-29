@@ -5,9 +5,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
@@ -25,9 +25,12 @@ import com.fab.rss.utils.models.RSSResponse;
 import com.fab.rss.utils.services.BaseApiService;
 import com.fab.rss.utils.services.IApiService;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+import com.mikepenz.itemanimators.AlphaCrossFadeAnimator;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.socks.library.KLog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +67,16 @@ public class MainActivity extends AppCompatActivity {
 
     FastItemAdapter<FeedItem> mFastAdapter;
 
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    FeedItem.DeleteCallback deleteCallback = new FeedItem.DeleteCallback() {
+        @Override
+        public void onDelete(int position) {
+            mFastAdapter.remove(position);
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,11 +108,26 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mFastAdapter = new FastItemAdapter<>();
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setItemAnimator(new AlphaCrossFadeAnimator());
         mRecyclerView.setAdapter(mFastAdapter);
 
-        mFastAdapter.add(new FeedItem());
-        mFastAdapter.withSavedInstanceState(savedInstanceState);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mFastAdapter.clear();
+                bind(null);
+            }
+        });
+
+        bind(savedInstanceState);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mCvAdd.getVisibility() == View.VISIBLE)
+            onClickFab();
+        else
+            super.onBackPressed();
     }
 
     @OnClick(R.id.fab)
@@ -133,8 +161,9 @@ public class MainActivity extends AppCompatActivity {
 
                         if (response.code() == 200) {
                             onClickFab();
+                            mFastAdapter.add(new FeedItem(response.body(), deleteCallback));
                             KLog.json(response.body().toString());
-                            Toasty.success(MainActivity.this, "Successfully added to your feeds").show();
+                            Toasty.success(MainActivity.this, "Successfully added to your feed").show();
                         } else if (response.code() == 503) {
                             Toasty.warning(MainActivity.this, "Server timeout. Trying again ...").show();
                             onClickValidate();
@@ -208,5 +237,46 @@ public class MainActivity extends AppCompatActivity {
         mEtComment.clearFocus();
         mEtUrl.clearFocus();
         mEtTitle.clearFocus();
+    }
+
+    private void bind(final Bundle savedInstanceState) {
+
+        if (UtilsFunctions.isNetworkAvailable()) {
+
+            final BaseApiService baseService = new BaseApiService();
+            IApiService service = baseService.create();
+            Call<List<RSSResponse>> call = service.getListRSS(RSSApp.getToken());
+
+            call.enqueue(new Callback<List<RSSResponse>>() {
+                @Override
+                public void onResponse(Call<List<RSSResponse>> call, Response<List<RSSResponse>> response) {
+
+                    swipeRefreshLayout.setRefreshing(false);
+
+                    if (response.code() == 200) {
+                        KLog.json(response.body().toString());
+
+                        for (RSSResponse item : response.body()) {
+                            mFastAdapter.add(new FeedItem(item, deleteCallback));
+                        }
+
+                        if (savedInstanceState != null)
+                            mFastAdapter.withSavedInstanceState(savedInstanceState);
+
+                    } else if (response.code() == 503) {
+                        Toasty.warning(MainActivity.this, "Server timeout. Trying again ...").show();
+                        bind(savedInstanceState);
+                    } else
+                        Toasty.warning(MainActivity.this, "Server error. Can't get your feed").show();
+
+                }
+
+                @Override
+                public void onFailure(Call<List<RSSResponse>> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+
+        }
     }
 }

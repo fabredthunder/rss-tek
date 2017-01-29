@@ -3,6 +3,7 @@ package com.fab.rss.utils.services;
 import com.fab.rss.utils.bundles.FeedBundle;
 import com.fab.rss.utils.bundles.SignBundle;
 import com.fab.rss.utils.models.AuthUser;
+import com.fab.rss.utils.models.BaseResponse;
 import com.fab.rss.utils.models.FeedRSS;
 import com.fab.rss.utils.models.RSSResponse;
 
@@ -55,7 +56,7 @@ public interface IApiService {
     Call<AuthUser> updateUser(@Header("token") String token, @Body SignBundle bundle);
 
     @DELETE(USER)
-    Call<String> deleteUser(@Header("token") String token);
+    Call<BaseResponse> deleteUser(@Header("token") String token);
 
     /**
      * RSS CALLS
@@ -71,9 +72,9 @@ public interface IApiService {
     Call<FeedRSS> getRSS(@Header("token") String token, @Path("id") String id);
 
     @DELETE(RSS_ID)
-    Call<String> deleteRSS(@Header("token") String token, @Path("id") String id);
+    Call<BaseResponse> deleteRSS(@Header("token") String token, @Path("id") String id);
 
     @PUT(RSS_ID)
-    Call<String> updateRSS(@Header("token") String token, @Path("id") String id, @Body FeedBundle bundle);
+    Call<BaseResponse> updateRSS(@Header("token") String token, @Path("id") String id, @Body FeedBundle bundle);
 
 }

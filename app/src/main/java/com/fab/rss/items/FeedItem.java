@@ -2,17 +2,28 @@ package com.fab.rss.items;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.fab.rss.R;
+import com.fab.rss.RSSApp;
+import com.fab.rss.utils.UtilsFunctions;
+import com.fab.rss.utils.models.BaseResponse;
+import com.fab.rss.utils.models.RSSResponse;
+import com.fab.rss.utils.services.BaseApiService;
+import com.fab.rss.utils.services.IApiService;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
-import com.ramotion.foldingcell.FoldingCell;
 import com.socks.library.KLog;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Author:       Fab
@@ -21,7 +32,16 @@ import butterknife.ButterKnife;
  */
 public class FeedItem extends AbstractItem<FeedItem, FeedItem.ViewHolder> {
 
+    private RSSResponse item;
+
+    private DeleteCallback callback;
+
     private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
+
+    public FeedItem(RSSResponse item, DeleteCallback callback) {
+        this.item = item;
+        this.callback = callback;
+    }
 
     @Override
     public int getType() {
@@ -37,10 +57,13 @@ public class FeedItem extends AbstractItem<FeedItem, FeedItem.ViewHolder> {
     public void bindView(final ViewHolder viewHolder, List<Object> payloads) {
         super.bindView(viewHolder, payloads);
 
-        viewHolder.foldingCell.setOnClickListener(new View.OnClickListener() {
+        viewHolder.title.setText(item.getTitle());
+        viewHolder.comment.setText(item.getComment());
+
+        viewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                viewHolder.foldingCell.toggle(false);
+            public void onClick(View view) {
+                deleteFeed(item.getId(), viewHolder.getAdapterPosition());
             }
         });
 
@@ -54,12 +77,15 @@ public class FeedItem extends AbstractItem<FeedItem, FeedItem.ViewHolder> {
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.folding_cell)
-        FoldingCell foldingCell;
+        @BindView(R.id.comment)
+        TextView comment;
+        @BindView(R.id.title)
+        TextView title;
+        @BindView(R.id.delete)
+        ImageView delete;
 
         ViewHolder(View view) {
             super(view);
-
             ButterKnife.bind(this, view);
         }
     }
@@ -73,5 +99,39 @@ public class FeedItem extends AbstractItem<FeedItem, FeedItem.ViewHolder> {
     @Override
     public ViewHolderFactory<? extends ViewHolder> getFactory() {
         return FACTORY;
+    }
+
+    private void deleteFeed(final String id, final int position) {
+        if (UtilsFunctions.isNetworkAvailable()) {
+
+            final BaseApiService baseService = new BaseApiService();
+            IApiService service = baseService.create();
+            Call<BaseResponse> call = service.deleteRSS(RSSApp.getToken(), id);
+
+            call.enqueue(new Callback<BaseResponse>() {
+                @Override
+                public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+
+                    if (response.code() == 200) {
+                        Toasty.success(RSSApp.getInstance(), "Feed successfully deleted").show();
+                        callback.onDelete(position);
+                    } else if (response.code() == 503) {
+                        Toasty.warning(RSSApp.getInstance(), "Server timeout. Trying again ...").show();
+                        deleteFeed(id, position);
+                    } else
+                        Toasty.warning(RSSApp.getInstance(), "Server error").show();
+                }
+
+                @Override
+                public void onFailure(Call<BaseResponse> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+
+        }
+    }
+
+    public interface DeleteCallback {
+        void onDelete(int position);
     }
 }
