@@ -11,8 +11,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -50,15 +48,12 @@ public interface IApiService {
      * USER'S CALLS
      */
 
-    @FormUrlEncoded
     @GET(USER)
     Call<AuthUser> getUser(@Header("token") String token);
 
-    @FormUrlEncoded
     @PUT(USER)
-    Call<AuthUser> updateUser(@Header("token") String token, @Field("name") String name, @Field("password") String password);
+    Call<AuthUser> updateUser(@Header("token") String token, @Body SignBundle bundle);
 
-    @FormUrlEncoded
     @DELETE(USER)
     Call<String> deleteUser(@Header("token") String token);
 
@@ -69,21 +64,16 @@ public interface IApiService {
     @POST(RSS)
     Call<RSSResponse> addRSS(@Header("token") String token, @Body FeedBundle bundle);
 
-    @FormUrlEncoded
     @GET(RSS)
     Call<List<RSSResponse>> getListRSS(@Header("token") String token);
 
-    @FormUrlEncoded
     @GET(RSS_ID)
     Call<FeedRSS> getRSS(@Header("token") String token, @Path("id") String id);
 
-    @FormUrlEncoded
     @DELETE(RSS_ID)
     Call<String> deleteRSS(@Header("token") String token, @Path("id") String id);
 
-    @FormUrlEncoded
     @PUT(RSS_ID)
-    Call<String> updateRSS(@Header("token") String token, @Path("id") String id, @Field("title") String title,
-                           @Field("url") String url, @Field("comment") String comment);
+    Call<String> updateRSS(@Header("token") String token, @Path("id") String id, @Body FeedBundle bundle);
 
 }
