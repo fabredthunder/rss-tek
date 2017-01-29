@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (response.code() == 200) {
                             onClickFab();
-                            mFastAdapter.add(new FeedItem(response.body(), deleteCallback));
+                            mFastAdapter.add(new FeedItem(response.body(), deleteCallback, MainActivity.this));
                             KLog.json(response.body().toString());
                             Toasty.success(MainActivity.this, "Successfully added to your feed").show();
                         } else if (response.code() == 503) {
@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
                         KLog.json(response.body().toString());
 
                         for (RSSResponse item : response.body()) {
-                            mFastAdapter.add(new FeedItem(item, deleteCallback));
+                            mFastAdapter.add(new FeedItem(item, deleteCallback, MainActivity.this));
                         }
 
                         if (savedInstanceState != null)

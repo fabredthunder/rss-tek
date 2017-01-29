@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="feeditem_id" type="id" />
+    <item name="subfeeditem_id" type="id" />
 </resources>
