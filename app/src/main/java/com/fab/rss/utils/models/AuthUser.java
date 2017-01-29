@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Author:       Fab
@@ -26,10 +27,16 @@ public class AuthUser implements Serializable {
     @Expose
     private String token;
 
-/*
     @SerializedName("rss")
     @Expose
-    RSS[] rss;*/
+    private String[] rss;
+
+    public AuthUser(String id, String name, String token, String[] rss) {
+        this.id = id;
+        this.name = name;
+        this.token = token;
+        this.rss = rss;
+    }
 
     public AuthUser(String id, String name, String token) {
         this.id = id;
@@ -59,5 +66,23 @@ public class AuthUser implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String[] getRss() {
+        return rss;
+    }
+
+    public void setRss(String[] rss) {
+        this.rss = rss;
+    }
+
+    @Override
+    public String toString() {
+        return "AuthUser{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", token='" + token + '\'' +
+                ", rss=" + Arrays.toString(rss) +
+                '}';
     }
 }

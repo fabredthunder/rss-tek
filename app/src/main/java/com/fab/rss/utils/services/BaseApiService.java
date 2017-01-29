@@ -1,11 +1,7 @@
 package com.fab.rss.utils.services;
 
-import java.io.IOException;
-
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -22,22 +18,9 @@ public class BaseApiService {
 
     public BaseApiService() {
 
-        OkHttpClient client = new OkHttpClient.Builder()
-            .addInterceptor(
-                new Interceptor() {
-                    @Override
-                    public Response intercept(Interceptor.Chain chain) throws IOException {
-                        Request original = chain.request();
-
-                        // Request customization: add request headers
-                        Request.Builder requestBuilder = original.newBuilder()
-                                .method(original.method(), original.body());
-
-                        Request request = requestBuilder.build();
-                        return chain.proceed(request);
-                    }
-                })
-            .build();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(IApiService.BASE_URL_API)

@@ -1,48 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    tools:context="com.fab.rss.activities.LoginActivity">
 
     <FrameLayout
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:layout_gravity="bottom|end">
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
         <android.support.v7.widget.CardView
             android:id="@+id/cv_add"
             app:cardBackgroundColor="@color/colorPrimary"
+            android:layout_marginTop="32dp"
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="320dp"
             app:cardCornerRadius="6dp"
             app:cardElevation="3dp"
-            app:cardUseCompatPadding="true"
-            android:visibility="invisible">
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="32dp">
+                android:layout_height="match_parent">
 
                 <TextView
+                    android:layout_marginTop="50dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/add_feed"
+                    android:layout_marginStart="50dp"
+                    android:text="@string/register"
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
 
                 <LinearLayout
                     android:layout_marginTop="10dp"
+                    android:paddingStart="50dp"
+                    android:paddingEnd="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
 
@@ -54,12 +53,12 @@
 
                         <EditText
                             android:textSize="16sp"
-                            android:hint="@string/Title"
+                            android:hint="@string/Username"
                             android:textColor="#f0f7f4"
-                            android:id="@+id/et_title"
+                            android:id="@+id/et_username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text"
+                            android:inputType="textPersonName"
                             android:background="@drawable/selector_bg_edit_2"
                             android:textCursorDrawable="@drawable/bg_input_cursor_2"
                             android:paddingBottom="2dp"/>
@@ -69,6 +68,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:paddingStart="50dp"
+                    android:paddingEnd="30dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
@@ -81,12 +82,12 @@
 
                         <EditText
                             android:textSize="16sp"
-                            android:hint="@string/Url"
+                            android:hint="@string/Password"
                             android:textColor="#f0f7f4"
-                            android:id="@+id/et_url"
+                            android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textUri"
+                            android:inputType="textPassword"
                             android:background="@drawable/selector_bg_edit_2"
                             android:textCursorDrawable="@drawable/bg_input_cursor_2"
                             android:paddingBottom="2dp"/>
@@ -96,6 +97,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:paddingStart="50dp"
+                    android:paddingEnd="30dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
@@ -109,11 +112,11 @@
                         <EditText
                             android:textSize="16sp"
                             android:textColor="#f0f7f4"
-                            android:hint="@string/Comment"
-                            android:id="@+id/et_comment"
+                            android:hint="@string/repeat_password"
+                            android:id="@+id/et_repeatpassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text"
+                            android:inputType="textPassword"
                             android:background="@drawable/selector_bg_edit_2"
                             android:textCursorDrawable="@drawable/bg_input_cursor_2"
                             android:paddingBottom="2dp"/>
@@ -130,24 +133,23 @@
                     android:stateListAnimator="@drawable/state_list_animator_z"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:text="@string/validate"
-                    android:textColor="@color/colorPrimary"/>
+                    android:text="@string/next"
+                    android:textColor="@color/colorPrimaryDark"/>
 
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal"
+            android:src="@drawable/plus_x"
+            android:transitionName="loginFab"
+            android:layout_gravity="center_horizontal|top"/>
+
     </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundTint="@color/colorPrimary"
-        app:fabSize="normal"
-        android:src="@drawable/plus"
-        android:transitionName="loginFab"
-        android:layout_gravity="end|bottom"
-        app:useCompatPadding="true"/>
-
-</FrameLayout>
+</RelativeLayout>

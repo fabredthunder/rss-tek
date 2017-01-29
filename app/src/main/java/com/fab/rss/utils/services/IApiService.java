@@ -1,5 +1,7 @@
 package com.fab.rss.utils.services;
 
+import com.fab.rss.utils.bundles.FeedBundle;
+import com.fab.rss.utils.bundles.SignBundle;
 import com.fab.rss.utils.models.AuthUser;
 import com.fab.rss.utils.models.FeedRSS;
 import com.fab.rss.utils.models.RSSResponse;
@@ -7,6 +9,7 @@ import com.fab.rss.utils.models.RSSResponse;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -23,27 +26,25 @@ import retrofit2.http.Path;
  */
 
 @SuppressWarnings("UnusedDeclaration")
-interface IApiService {
+public interface IApiService {
 
     String BASE_URL_API = "https://rssfeedaggregator.herokuapp.com/";
 
     String SIGN_UP = "register";
     String SIGN_IN = "login";
-    String USER = "user";
-    String RSS = "rss";
-    String RSS_ID = "rss/{id}";
+    String USER = "api/user";
+    String RSS = "api/rss";
+    String RSS_ID = "api/rss/{id}";
 
     /**
      * LOGIN && REGISTRATION CALLS
      */
 
-    @FormUrlEncoded
     @POST(SIGN_UP)
-    Call<AuthUser> signUp(@Field("name") String name, @Field("password") String password);
+    Call<AuthUser> signUp(@Body SignBundle bundle);
 
-    @FormUrlEncoded
     @POST(SIGN_IN)
-    Call<AuthUser> signIn(@Field("name") String name, @Field("password") String password);
+    Call<AuthUser> signIn(@Body SignBundle bundle);
 
     /**
      * USER'S CALLS
@@ -65,10 +66,8 @@ interface IApiService {
      * RSS CALLS
      */
 
-    @FormUrlEncoded
     @POST(RSS)
-    Call<RSSResponse> addRSS(@Header("token") String token, @Field("title") String title, @Field("url") String url,
-                             @Field("comment") String comment);
+    Call<RSSResponse> addRSS(@Header("token") String token, @Body FeedBundle bundle);
 
     @FormUrlEncoded
     @GET(RSS)

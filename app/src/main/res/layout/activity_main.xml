@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
+    android:background="@drawable/bg"
     app:edPosition="1"
     app:edMenuSize="260dp"
     app:edMenuBackground="#dddddd">
@@ -17,12 +18,14 @@
     <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
         android:id="@+id/menulayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
 
         <FrameLayout
             android:id="@+id/id_container_menu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"/>
 
     </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
 

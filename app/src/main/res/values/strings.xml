@@ -1,5 +1,17 @@
 <resources>
-    <string name="app_name">RSS</string>
-
-    <string name="read_more">READ MORE…</string>
+    <string name="app_name">EpiRSS</string>
+    <string name="login_success">login success</string>
+    <string name="login">LOGIN</string>
+    <string name="Username">Username</string>
+    <string name="Title">Title</string>
+    <string name="Comment">Comment</string>
+    <string name="Url">Url</string>
+    <string name="Password">Password</string>
+    <string name="forgot_your_password">Forgot your password ?</string>
+    <string name="go">GO</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="next">NEXT</string>
+    <string name="validate">VALIDATE</string>
+    <string name="register">REGISTER</string>
+    <string name="add_feed">ADD FEED</string>
 </resources>

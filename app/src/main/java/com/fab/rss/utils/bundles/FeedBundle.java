@@ -1,4 +1,4 @@
-package com.fab.rss.utils.models;
+package com.fab.rss.utils.bundles;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -8,15 +8,11 @@ import java.io.Serializable;
 /**
  * Author:       Fab
  * Email:        ffontaine@thingsaremoving.com
- * Created:      1/28/17
+ * Created:      1/29/17
  */
 
 @SuppressWarnings("UnusedDeclaration")
-public class RSSResponse implements Serializable {
-
-    @SerializedName("id")
-    @Expose
-    private String id;
+public class FeedBundle implements Serializable {
 
     @SerializedName("title")
     @Expose
@@ -30,25 +26,10 @@ public class RSSResponse implements Serializable {
     @Expose
     private String comment;
 
-    public RSSResponse(String id, String title, String url, String comment) {
-        this.id = id;
+    public FeedBundle(String title, String url, String comment) {
         this.title = title;
         this.url = url;
         this.comment = comment;
-    }
-
-    public RSSResponse(String title, String url, String comment) {
-        this.title = title;
-        this.url = url;
-        this.comment = comment;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -77,9 +58,8 @@ public class RSSResponse implements Serializable {
 
     @Override
     public String toString() {
-        return "RSSResponse{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
+        return "FeedBundle{" +
+                "title='" + title + '\'' +
                 ", url='" + url + '\'' +
                 ", comment='" + comment + '\'' +
                 '}';
