@@ -38,15 +38,15 @@ import retrofit2.Response;
 public class RegisterActivity extends AppCompatActivity {
 
     @BindView(R.id.fab)
-    FloatingActionButton mFab;
+    private FloatingActionButton mFab;
     @BindView(R.id.cv_add)
-    CardView mCvAdd;
+    private CardView mCvAdd;
     @BindView(R.id.et_password)
-    EditText mEtPassword;
+    private EditText mEtPassword;
     @BindView(R.id.et_repeatpassword)
-    EditText mEtRepeatPassword;
+    private EditText mEtRepeatPassword;
     @BindView(R.id.et_username)
-    EditText mEtUsername;
+    private EditText mEtUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,17 +159,17 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onTransitionCancel(Transition transition) {
-
+                // No need to do something here
             }
 
             @Override
             public void onTransitionPause(Transition transition) {
-
+                // No need to do something here
             }
 
             @Override
             public void onTransitionResume(Transition transition) {
-
+                // No need to do something here
             }
 
 

@@ -1,6 +1,5 @@
 package com.fab.rss.items;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +26,7 @@ import butterknife.ButterKnife;
  * Email:        ffontaine@thingsaremoving.com
  * Created:      1/9/17
  */
-public class SubFeedItem extends AbstractItem<SubFeedItem, SubFeedItem.ViewHolder> {
+class SubFeedItem extends AbstractItem<SubFeedItem, SubFeedItem.ViewHolder> {
 
     private RSS item;
 
@@ -78,11 +77,11 @@ public class SubFeedItem extends AbstractItem<SubFeedItem, SubFeedItem.ViewHolde
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.title)
-        TextView title;
+        private TextView title;
         @BindView(R.id.image)
-        ImageView image;
+        private ImageView image;
         @BindView(R.id.root)
-        LinearLayout root;
+        private LinearLayout root;
 
         ViewHolder(View view) {
             super(view);

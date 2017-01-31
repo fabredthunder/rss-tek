@@ -52,21 +52,21 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.drawerlayout)
-    FlowingDrawer mDrawer;
+    private FlowingDrawer mDrawer;
 
     @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
 
     @BindView(R.id.fab)
-    FloatingActionButton mFab;
+    private FloatingActionButton mFab;
     @BindView(R.id.cv_add)
-    CardView mCvAdd;
+    private CardView mCvAdd;
     @BindView(R.id.et_title)
-    EditText mEtTitle;
+    private EditText mEtTitle;
     @BindView(R.id.et_url)
-    EditText mEtUrl;
+    private EditText mEtUrl;
     @BindView(R.id.et_comment)
-    EditText mEtComment;
+    private EditText mEtComment;
 
     FastItemAdapter<FeedItem> mFastAdapter;
 

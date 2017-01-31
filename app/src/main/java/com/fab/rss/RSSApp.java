@@ -18,8 +18,6 @@ public class RSSApp extends Application {
      * ATTRIBUTES *
      **************/
 
-    private static final String TAG = "RSSApp";
-
     private static RSSApp instance = null;
 
     private static AuthUser mUser = null;

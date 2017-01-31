@@ -122,19 +122,19 @@ public class FeedItem extends AbstractItem<FeedItem, FeedItem.ViewHolder> {
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.comment)
-        TextView comment;
+        private TextView comment;
         @BindView(R.id.title)
-        TextView title;
+        private TextView title;
         @BindView(R.id.delete)
-        ImageView delete;
+        private ImageView delete;
         @BindView(R.id.see_more)
-        ImageView seeMore;
+        private ImageView seeMore;
         @BindView(R.id.more)
-        LinearLayout more;
+        private LinearLayout more;
         @BindView(R.id.list)
-        RecyclerView recyclerView;
+        private RecyclerView recyclerView;
         @BindView(R.id.progress)
-        ProgressBar progressBar;
+        private ProgressBar progressBar;
 
         FastItemAdapter<SubFeedItem> fastItemAdapter;
 
