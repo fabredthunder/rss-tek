@@ -51,7 +51,7 @@ abstract class DAOBase extends SQLiteOpenHelper {
         mDb.close();
     }
 
-    public SQLiteDatabase getDb() {
+    SQLiteDatabase getDb() {
         return open();
     }
 

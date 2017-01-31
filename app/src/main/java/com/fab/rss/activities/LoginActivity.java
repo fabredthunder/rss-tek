@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.transition.Explode;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.fab.rss.R;

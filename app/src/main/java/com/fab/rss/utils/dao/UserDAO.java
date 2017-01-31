@@ -23,13 +23,13 @@ public final class UserDAO extends DAOBase {
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_TOKEN = "token";
 
-    private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" +
+    public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" +
             COLUMN_ID + " TEXT, " +
             COLUMN_USERNAME + " TEXT, " +
             COLUMN_TOKEN + " TEXT );";
 
 
-    private static final String TABLE_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+    public static final String TABLE_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
     public UserDAO(Context context) {
         super(context);

@@ -81,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (password.equals(repeat)) {
 
-                if (!password.equals("") && !repeat.equals("") && !username.equals("")) {
+                if (!"".equals(password) && !"".equals(repeat) && !"".equals(username)) {
 
                     final BaseApiService baseService = new BaseApiService();
                     IApiService service = baseService.create();
