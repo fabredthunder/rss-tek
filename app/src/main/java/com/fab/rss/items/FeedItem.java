@@ -88,6 +88,7 @@ public class FeedItem extends AbstractItem<FeedItem, FeedItem.ViewHolder> {
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                // Just dismiss here
                             }
                         })
                         .show();
@@ -136,7 +137,7 @@ public class FeedItem extends AbstractItem<FeedItem, FeedItem.ViewHolder> {
         @BindView(R.id.progress)
         private ProgressBar progressBar;
 
-        FastItemAdapter<SubFeedItem> fastItemAdapter;
+        private FastItemAdapter<SubFeedItem> fastItemAdapter;
 
         ViewHolder(View view) {
             super(view);

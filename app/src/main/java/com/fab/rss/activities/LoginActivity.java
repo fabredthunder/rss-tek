@@ -36,10 +36,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEtUsername;
     @BindView(R.id.et_password)
     private EditText mEtPassword;
-    @BindView(R.id.btn_go)
-    private Button mBtnGo;
-    @BindView(R.id.cv)
-    private CardView mCv;
     @BindView(R.id.fab)
     private FloatingActionButton mFab;
 
@@ -64,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (UtilsFunctions.isNetworkAvailable()) {
 
-            if (!password.equals("") && !username.equals("")) {
+            if (!"".equals(password) && !"".equals(username)) {
 
                 final BaseApiService baseService = new BaseApiService();
                 IApiService service = baseService.create();

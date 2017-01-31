@@ -68,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.et_comment)
     private EditText mEtComment;
 
-    FastItemAdapter<FeedItem> mFastAdapter;
+    private FastItemAdapter<FeedItem> mFastAdapter;
 
     @BindView(R.id.swipeRefresh)
-    SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    FeedItem.DeleteCallback deleteCallback = new FeedItem.DeleteCallback() {
+    private FeedItem.DeleteCallback deleteCallback = new FeedItem.DeleteCallback() {
         @Override
         public void onDelete(int position) {
             mFastAdapter.remove(position);
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (UtilsFunctions.isNetworkAvailable()) {
 
-            if (!title.equals("") && !url.equals("") && !comment.equals("")) {
+            if (!"".equals(title) && !"".equals(url) && !"".equals(comment)) {
 
                 final BaseApiService baseService = new BaseApiService();
                 IApiService service = baseService.create();
