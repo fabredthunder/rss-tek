@@ -3,3 +3,12 @@
 # RSS-TEK
 
 Small RSS aggregator app made for an Epitech projet.
+
+## User documentation
+
+This guide is intended for a new user.
+
+### Login / Registration
+
+![Login](/app/screenshots/device-2017-02-03-143749.png)
+Format: ![Alt Text](url)
