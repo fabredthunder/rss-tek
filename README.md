@@ -10,5 +10,4 @@ This guide is intended for a new user.
 
 ### Login / Registration
 
-![Login](/app/screenshots/device-2017-02-03-143749.png)
-Format: ![Alt Text](url)
+![Login](/app/screenshots/device-2017-02-03-143749.png | width=100)
