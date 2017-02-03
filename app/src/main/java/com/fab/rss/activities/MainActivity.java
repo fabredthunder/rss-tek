@@ -52,26 +52,26 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.drawerlayout)
-    private FlowingDrawer mDrawer;
+    FlowingDrawer mDrawer;
 
     @BindView(R.id.recycler_view)
-    private RecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
 
     @BindView(R.id.fab)
-    private FloatingActionButton mFab;
+    FloatingActionButton mFab;
     @BindView(R.id.cv_add)
-    private CardView mCvAdd;
+    CardView mCvAdd;
     @BindView(R.id.et_title)
-    private EditText mEtTitle;
+    EditText mEtTitle;
     @BindView(R.id.et_url)
-    private EditText mEtUrl;
+    EditText mEtUrl;
     @BindView(R.id.et_comment)
-    private EditText mEtComment;
+    EditText mEtComment;
 
     private FastItemAdapter<FeedItem> mFastAdapter;
 
     @BindView(R.id.swipeRefresh)
-    private SwipeRefreshLayout swipeRefreshLayout;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private FeedItem.DeleteCallback deleteCallback = new FeedItem.DeleteCallback() {
         @Override

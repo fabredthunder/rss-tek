@@ -31,11 +31,11 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.et_username)
-    private EditText mEtUsername;
+    EditText mEtUsername;
     @BindView(R.id.et_password)
-    private EditText mEtPassword;
+    EditText mEtPassword;
     @BindView(R.id.fab)
-    private FloatingActionButton mFab;
+    FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

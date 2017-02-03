@@ -77,11 +77,11 @@ class SubFeedItem extends AbstractItem<SubFeedItem, SubFeedItem.ViewHolder> {
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.title)
-        private TextView title;
+        TextView title;
         @BindView(R.id.image)
-        private ImageView image;
+        ImageView image;
         @BindView(R.id.root)
-        private LinearLayout root;
+        LinearLayout root;
 
         ViewHolder(View view) {
             super(view);
